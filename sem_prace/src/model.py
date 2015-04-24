@@ -19,6 +19,7 @@ class BackgroundModel:
         """
             Kontruktor tridy
         """
+        self.model = None
         
     def add_frame(self, frame):
         """
@@ -28,6 +29,8 @@ class BackgroundModel:
             :type frame: numpy matice M x N
 
         """
+        # primitivní způsob stanovení modelu, určitě vymyslíte něco lepšího
+        self.model = frame
             
     def get_model(self):
         """
@@ -35,4 +38,6 @@ class BackgroundModel:
             
             :returns: numpy matice M x N
         """
+        # zde bude váš kód pro výpočet modelu
+        return self.model
 
