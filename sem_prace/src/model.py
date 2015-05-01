@@ -7,7 +7,8 @@
     Nemente nazev souboru, ani nazvy funkci. 
     
 """
-
+import numpy as np
+import skimage.filter
 
 class BackgroundModel:
     """
@@ -19,7 +20,8 @@ class BackgroundModel:
         """
             Kontruktor tridy
         """
-        self.model = None
+        self.frames = []
+        self.model = []
         
     def add_frame(self, frame):
         """
@@ -30,14 +32,18 @@ class BackgroundModel:
 
         """
         # primitivní způsob stanovení modelu, určitě vymyslíte něco lepšího
-        self.model = frame
-            
+        if len(self.frames) < 51:
+            self.frames.append(frame)
+        self.model = self.frames[0]*0.0
+        for pic in self.frames:
+            self.model += pic*1.0
+        self.model /= len(self.frames)
+        self.model = np.array(self.model, dtype = np.uint8)
     def get_model(self):
         """
             Vypocíta model pozadi a vrati ho    
             
             :returns: numpy matice M x N
         """
-        # zde bude váš kód pro výpočet modelu
+        # zde bude váš kód pro výpočet modelu - průměr
         return self.model
-
